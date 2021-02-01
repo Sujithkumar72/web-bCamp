@@ -1,0 +1,17 @@
+{
+  "name": "todo-v1",
+  "version": "1.0.0",
+  "description": "Todo List version1",
+  "main": "todo.js",
+  "scripts": {
+    "start": "nodemon todo.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sujith kumar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
