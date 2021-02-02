@@ -10,35 +10,22 @@ app.listen(4000, function(){
   console.log("server started at 4000");
 });
 
+var newtasks =[  "Chocolates", "Beer","chips",];
 app.get("/", function(req, res){
   var today= new Date();
-  var dayNo= today.getDay();
-  var dayName ="";
-
-  switch (dayNo) {
-    case 0:
-      dayName ="Sunday";
-      break;
-    case 1:
-      dayName="Monday";
-      break;
-    case 2:
-      dayName="Tuesday";
-      break;
-    case 3:
-      dayName="Wednesday";
-      break;
-    case 4:
-      dayName="Thursday";
-      break;
-    case 5:
-      dayName="Friday";
-      break;
-    case 6:
-      dayName ="Saturday";
-      break;
-    default:
-      console.log("Error occured"+ dayName);
+  var dateSettings = {
+    weekday:"long",
+    day:"numeric",
+    month:"long",
+    year:"numeric",
   }
-      res.render("list", {kindOfDay:dayName});
+  var dayFull = today.toLocaleDateString("en-IN", dateSettings);
+
+      res.render("list", {kindOfDay:dayFull, tasknew:newtasks});
+});
+
+app.post("/", function(req, res){
+    var newtask = req.body.task;
+    newtasks.push(newtask);
+    res.redirect("/");
 });
