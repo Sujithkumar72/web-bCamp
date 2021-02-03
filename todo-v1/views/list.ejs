@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>To Do list</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>To Do list</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="box" id="heading">
     <h1><%= kindOfDay %></h1>
-<ul>
 
-  <% for (var i=0; i<=tasknew.length; i++){ %>
-    <li><%= tasknew[i] %></li>
-  <% } %>
+  </div>
+  <div class="box">
+    <% for (var i=0; i<tasknew.length; i++){ %>
+    <div class="item">
+      <input type="checkbox" name="" value="">
+      <p><%= tasknew[i] %></p>
+    </div>
 
-</ul>
+    <% } %>
 
-<form action="/" method="post">
-  <input type="text" name="task" placeholder="Type task name">
-  <button type="submit" name="submit">Add Task</button>
+    <form class="item" action="/" method="post">
+      <input type="text" name="task" placeholder="New item" autocomplete="off">
+      <button type="submit" name="submit">+</button>
 
-</form>
+    </form>
 
-  </body>
+
+  </div>
+
+
+
+
+</body>
+
 </html>

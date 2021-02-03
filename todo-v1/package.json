@@ -4,7 +4,7 @@
   "description": "Todo List version1",
   "main": "todo.js",
   "scripts": {
-    "start": "nodemon todo.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sujith kumar",

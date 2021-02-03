@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Student List</title>
+    <link rel="stylesheet" href="public/styles.css">
+  </head>
+  <body>
+    <h1>Students List as on <%= asondate%></h1>
+    <ul>
+      <%for (var i=0;i<newstud.length; i++){%>
+        <li><%= newstud[i]%></li>
+      <%}%>
+
+    </ul>
+    <form class="" action="/" method="post">
+      <input type="text" name="newname">
+      <button type="submit" name="submit"> Add New</button>
+    </form>
+  </body>
+</html>

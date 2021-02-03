@@ -5,12 +5,13 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
+app.use(express.static("public"));
 
-app.listen(4000, function(){
-  console.log("server started at 4000");
+app.listen(3000, function(){
+  console.log("server started at 3000");
 });
 
-var newtasks =[  "Chocolates", "Beer","chips",];
+var newtasks =["coffee","cake","muffins"];
 app.get("/", function(req, res){
   var today= new Date();
   var dateSettings = {
