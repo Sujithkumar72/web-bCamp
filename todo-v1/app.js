@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const fullDay = require(__dirname+"/date.js");
 
 const app = express();
 
@@ -13,19 +14,13 @@ app.listen(3000, function() {
   console.log("server started at 3000");
 });
 
-var newtasks = ["coffee", "cake", "muffins"];
-var workitems = [];
-var dayFull = "";
+const newtasks = ["coffee", "cake", "muffins"];
+const workitems = [];
+let dayFull="";
+
 
 app.get("/", function(req, res) {
-  var today = new Date();
-  var dateSettings = {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }
-  dayFull = today.toLocaleDateString("en-IN", dateSettings);
+dayFull = fullDay.getDayOnly();
 
   res.render("list", {
     listTitle: dayFull,
