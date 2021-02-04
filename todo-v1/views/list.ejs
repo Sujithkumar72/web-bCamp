@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<%- include("header"); -%>
 
-<head>
-  <meta charset="utf-8">
-  <title>To Do list</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-
-<body>
   <div class="box" id="heading">
     <h1><%= listTitle %></h1>
 
@@ -25,6 +17,5 @@
       <button type="submit" name="submitName" value="<%=listTitle%>">+</button>
     </form>
   </div>
-</body>
 
-</html>
+<%!- include("footer"); -%>
