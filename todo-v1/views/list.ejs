@@ -9,7 +9,7 @@
 
 <body>
   <div class="box" id="heading">
-    <h1><%= kindOfDay %></h1>
+    <h1><%= listTitle %></h1>
 
   </div>
   <div class="box">
@@ -18,21 +18,13 @@
       <input type="checkbox" name="" value="">
       <p><%= tasknew[i] %></p>
     </div>
-
     <% } %>
 
     <form class="item" action="/" method="post">
       <input type="text" name="task" placeholder="New item" autocomplete="off">
-      <button type="submit" name="submit">+</button>
-
+      <button type="submit" name="submitName" value="<%=listTitle%>">+</button>
     </form>
-
-
   </div>
-
-
-
-
 </body>
 
 </html>
