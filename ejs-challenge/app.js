@@ -20,7 +20,7 @@ app.listen(3001, function(){
 });
 
 app.get("/", function(req,res){
-  res.render("home");
+  res.render("home",{homeStartingContentejs: homeStartingContent});
 })
 
 
