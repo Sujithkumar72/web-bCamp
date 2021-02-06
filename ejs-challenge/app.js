@@ -25,6 +25,10 @@ app.get("/about", function(req, res){
   res.render("about",{aboutContentejs:aboutContent});
 });
 
+app.get("/contact", function(req, res){
+  res.render("contact", {contactContentejs: contactContent});
+});
+
 
 
 
