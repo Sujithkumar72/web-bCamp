@@ -15,13 +15,15 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-app.listen(3001, function(){
-  console.log("Server started at 3001");
-});
+
 
 app.get("/", function(req,res){
   res.render("home",{homeStartingContentejs: homeStartingContent});
 })
+
+app.get("/about", function(req, res){
+  res.render("about",{aboutContentejs:aboutContent});
+});
 
 
 
