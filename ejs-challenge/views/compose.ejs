@@ -2,9 +2,22 @@
 
 <h1>Compose</h1>
 
-<form class="" action="/" method="post">
-  <input type="text" name="composeejs" value="">
-  <button type="submit" name="composebtn">Publish</button>
+
+<form class="container form" action="/" method="post">
+  <div class="form-group row">
+    <label for="Title" class="col-form-label">Title</label>
+    <input type="text" class="form-control" name="newtitle" value="" id="Title">
+
+
+    <label for="bodyText" class="col-form-label">Post</label>
+    <textarea type="textarea" rows="4" name="newPost" class="form-control" value="" id="bodyText">
+    </textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary" name="composebtn">Publish</button>
+
+
+
 
 </form>
 
