@@ -29,8 +29,14 @@ app.get("/contact", function(req, res){
   res.render("contact", {contactContentejs: contactContent});
 });
 
+app.get("/compose", function(req,res){
+  res.render("compose");
+});
 
-
+app.post("/",function(req, res){
+  let newcomposed = req.body.composeejs;
+  console.log(newcomposed);
+})
 
 
 
