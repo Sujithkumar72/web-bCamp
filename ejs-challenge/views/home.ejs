@@ -3,5 +3,24 @@
 
 <h1>Home</h1>
 <p><%= homeStartingContentejs %></p>
+<!-- <ul>
+  <% for(var i=0; i<blogTitle.length; i++){ %>
+    <% for(var j=0;j<blogcontent.length; j++){ %>
+      <li><h2> <%= blogTitle[i] %> </h2></li>
+      <li> <%= blogcontent[i] %> </li>
+      <%i++;%>
+      <%j++;%>
+    <%}%>
+<%}%>
+</ul> -->
+
+<% for(var i=0; i<blogTitle.length; i++){ %>
+  <% for(var j=0;j<blogcontent.length; j++){ %>
+    <h1> <%= blogTitle[i] %> </h1>
+    <p><%= blogcontent[i] %></p>
+    <%i++;%>
+    <%j++;%>
+  <%}%>
+<%}%>
 
 <%- include("./partials/footer"); %>
