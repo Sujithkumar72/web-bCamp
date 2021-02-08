@@ -18,8 +18,8 @@ let postsBody =[];
 let posts =[];
 
 app.get("/", function(req, res) {
-  res.render("home", {homeStartingContentejs: homeStartingContent, blogTitle: postsTitle, blogcontent:postsBody});
-    //res.render("home", {homeStartingContentejs: homeStartingContent, blogPosts: posts});
+  //res.render("home", {homeStartingContentejs: homeStartingContent, blogTitle: postsTitle, blogcontent:postsBody});
+    res.render("home", {homeStartingContentejs: homeStartingContent, blogPosts: posts});
 })
 app.get("/about", function(req, res) { res.render("about", {aboutContentejs: aboutContent});});
 app.get("/contact", function(req, res) {res.render("contact", {contactContentejs: contactContent});});
@@ -32,9 +32,9 @@ app.post("/compose", function(req, res) {
     postTitle: req.body.newtitle,
     postBody: req.body.newPost
   };
-  postsTitle.push(post.postTitle);
-postsBody.push(post.postBody);
-  //posts.push(post);
+  //postsTitle.push(post.postTitle);
+//postsBody.push(post.postBody);
+  posts.push(post);
   res.redirect("/");
 });
 
