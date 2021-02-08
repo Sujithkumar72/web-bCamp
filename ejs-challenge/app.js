@@ -38,6 +38,10 @@ app.post("/compose", function(req, res) {
   res.redirect("/");
 });
 
+app.get("/posts/:dayPost-:postNo",function(req,res){
+  console.log(req.params.dayPost);
+  console.log(req.params.postNo);
+});
 
 
 
