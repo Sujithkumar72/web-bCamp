@@ -18,8 +18,8 @@ let postsBody =[];
 let posts =[];
 
 app.get("/", function(req, res) {
-  //res.render("home", {homeStartingContentejs: homeStartingContent, blogTitle: postsTitle, blogcontent:postsBody});
     res.render("home", {homeStartingContentejs: homeStartingContent, blogPosts: posts});
+    console.log(posts);
 })
 app.get("/about", function(req, res) { res.render("about", {aboutContentejs: aboutContent});});
 app.get("/contact", function(req, res) {res.render("contact", {contactContentejs: contactContent});});
@@ -32,15 +32,21 @@ app.post("/compose", function(req, res) {
     postTitle: req.body.newtitle,
     postBody: req.body.newPost
   };
-  //postsTitle.push(post.postTitle);
-//postsBody.push(post.postBody);
   posts.push(post);
   res.redirect("/");
 });
 
-app.get("/posts/:dayPost-:postNo",function(req,res){
-  console.log(req.params.dayPost);
-  console.log(req.params.postNo);
+app.get("/posts/:dayPost",function(req,res){
+let pageRequested = req.params.dayPost;
+
+posts.forEach(function(postBlog){
+  let checkPost = postBlog.postTitle;
+  if (checkPost === pageRequested){
+
+     console.log("Match found");
+   }
+ });
+
 });
 
 
