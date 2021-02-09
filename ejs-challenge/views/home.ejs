@@ -6,7 +6,7 @@
 
 <% blogPosts.forEach(function(blogPost){%>
   <h1><%= blogPost.postTitle %></h1>
-<p><%= blogPost.postBody %></p>
+<p><%= blogPost.postBody.substring(0,100)+ "..." %></p>
 <%})%>
 
 
