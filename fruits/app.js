@@ -2,19 +2,32 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/fruitsDB",{useNewUrlParser: true, useUnifiedTopology: true});
 
 const fruitSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
+  name: {type:String,
+  required:true},
+  rating: {
+  type: Number,
+  min:0,
+  max:10
+},
   review:String
 });
 
 const Fruite = mongoose.model("fruit", fruitSchema);
+
 const fruit = new Fruite({
   name:"Apple",
-  rating:7,
+  rating:67,
   review: "expensive"
-})
-// fruit.saves //saves single entry to the database.collectionmongo
+});
+//fruit.save(); //saves single entry to the database.collectionmongo
 
+const grapes = new Fruite({
+  name:"grapes",
+  rating:2,
+  review: "good"
+});
+
+// grapes.save();
 
 const kiwi = new Fruite({
   name:"kiwi",
@@ -53,12 +66,7 @@ const sujith= new Person({
 })
 // sujith.save(); // save single entry to the database.collection
 
-
-
-
-
-
-
+/*
 Fruite.find(function(err, fruits){
   if(err){
     console.log(err);
@@ -68,4 +76,25 @@ Fruite.find(function(err, fruits){
     });
   }
   mongoose.connection.close();
+})*/
+
+const foodSchema = new mongoose.Schema({
+  drink:{
+    type:String,
+    required:[true, "why no drink?"]
+  },
+  meal:{
+    type:String,
+    required:true
+  },
+  water: String
 })
+const Food = mongoose.model("food", foodSchema);
+
+const breakfast = new Food({
+  drink:"JD",
+  meal: "Dosa",
+  water: "0.25L"
+});
+
+breakfast.save();
