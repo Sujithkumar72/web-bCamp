@@ -13,7 +13,8 @@ const fruit = new Fruite({
   rating:7,
   review: "expensive"
 })
-// fruit.saves //saves single entry to the database.collection
+// fruit.saves //saves single entry to the database.collectionmongo
+
 
 const kiwi = new Fruite({
   name:"kiwi",
@@ -25,7 +26,7 @@ const orange = new Fruite({
   rating:9,
   review:"citric"
 })
-/* insert multiple fruits to the database
+/* inserts multiple fruits to the database
 Fruite.insertMany([kiwi, orange], function(err){
   if (err){
     console.log(err);
@@ -58,12 +59,13 @@ const sujith= new Person({
 
 
 
-const findDocuments = function(db, callback){
-  const collection = db.collection("fruits");
-  collection.find({}).toArray(function(err,fruits){
-    assert.equal(err,null);
-    console.log("Found the following records");
-    console.log(fruits);
-    callback(fruits);
-  })
-}
+Fruite.find(function(err, fruits){
+  if(err){
+    console.log(err);
+  } else{
+    fruits.forEach((fruit)=>{
+      console.log(fruit.name);
+    });
+  }
+  mongoose.connection.close();
+})
