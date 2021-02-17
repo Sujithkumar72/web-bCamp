@@ -61,15 +61,10 @@ app.get("/", function(req, res) {
 
   })
   console.log("Render successful.");
-
-
-
 });
 
 app.post("/", function(req, res) {
-
   const itemName = req.body.newItem;
-
   const newItem = new Item({
     name: itemName
   });
@@ -82,6 +77,18 @@ app.post("/", function(req, res) {
   //   items.push(item);
   //   res.redirect("/");
   // }
+});
+app.post("/delete",function(req,res){
+  const removeId = req.body.checkbox;
+  Item.findByIdAndRemove(removeId, function(err){
+    if(err){
+      console.log(err);
+    } else {
+      console.log("Remove executed.");
+    }
+    res.redirect("/");
+  });
+
 });
 
 app.get("/work", function(req, res) {
