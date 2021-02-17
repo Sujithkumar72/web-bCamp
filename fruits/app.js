@@ -69,6 +69,16 @@ const pineapple = new Fruite({
 })
 pineapple.save();
 
+const mango = new Fruite(
+  {
+    name:"Mango",
+    rating:8.5,
+    review:"Sweetier"
+  }
+);
+mango.save();
+
+
 const Person = mongoose.model("person", personSchema);
 
 const john = new Person({
@@ -83,8 +93,20 @@ const sujith= new Person({
 const samu = new Person({
   name:"samu",
   age: 28,
-  favfruit:
-})
+  favfruit:pineapple
+});
+
+samu.save();
+
+
+Person.updateOne({name:"sujith"},{favfruit:mango}, function(err){
+  if (err){
+    console.log(err);
+  }
+  else{
+    console.log("updated success.");
+  }
+});
 
 // Fruite.find(function(err, fruits){
 //   if(err){
