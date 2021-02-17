@@ -29,6 +29,14 @@ const grapes = new Fruite({
 
 // grapes.save();
 
+// Fruite.deleteMany({name:"grapes"}, function(err){
+//   if (err){
+//     console.log(err);
+//   } else{
+//     console.log("all selected docs deleted.");
+//   }
+// })
+
 const kiwi = new Fruite({
   name:"kiwi",
   rating: 8,
@@ -39,6 +47,56 @@ const orange = new Fruite({
   rating:9,
   review:"citric"
 })
+
+const peaches = new Fruite({
+  name: "Peaches",
+  rating:9
+})
+
+// peaches.save();
+
+
+const personSchema = new mongoose.Schema({
+  name:String,
+  age:Number,
+  favfruit:fruitSchema
+})
+
+const pineapple = new Fruite({
+  name:"pineapple",
+  rating:8,
+  review:"juicy"
+})
+pineapple.save();
+
+const Person = mongoose.model("person", personSchema);
+
+const john = new Person({
+  name:"John",
+  age: 37,
+})
+const sujith= new Person({
+  name:"sujith",
+  age:30
+})
+// sujith.save(); // save single entry to the database.collection
+const samu = new Person({
+  name:"samu",
+  age: 28,
+  favfruit:
+})
+
+// Fruite.find(function(err, fruits){
+//   if(err){
+//     console.log(err);
+//   } else{
+//     fruits.forEach((fruit)=>{
+//       console.log(fruit.review);
+//     });
+//   }
+//   mongoose.connection.close();
+// })
+
 /* inserts multiple fruits to the database
 Fruite.insertMany([kiwi, orange], function(err){
   if (err){
@@ -49,34 +107,24 @@ Fruite.insertMany([kiwi, orange], function(err){
   }
 })
 */
-const personSchema = new mongoose.Schema({
-  name:String,
-  age:Number
-})
 
-const Person = mongoose.model("person", personSchema);
-
-const john = new Person({
-  name:"John",
-  age: 37
-})
-const sujith= new Person({
-  name:"sujith",
-  age:30
-})
-// sujith.save(); // save single entry to the database.collection
-
-/*
-Fruite.find(function(err, fruits){
+/* updates the record
+Fruite.updateOne({_id:"602ccda4565d353450b14884"},{review:"Peaches are too yummy"}, function(err){
   if(err){
     console.log(err);
   } else{
-    fruits.forEach((fruit)=>{
-      console.log(fruit.name);
-    });
+    console.log("Successfully updated the Document.");
   }
-  mongoose.connection.close();
-})*/
+})
+*/
+
+// Fruite.deleteOne({name:"Peaches"}, function(err){
+//   if(err){
+//     console.log(err);
+//   } else{
+//     console.log("Documetn deleted successfully.");
+//   }
+// })
 
 const foodSchema = new mongoose.Schema({
   drink:{
@@ -97,4 +145,4 @@ const breakfast = new Food({
   water: "0.25L"
 });
 
-breakfast.save();
+// breakfast.save();
