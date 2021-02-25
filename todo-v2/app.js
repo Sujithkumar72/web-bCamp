@@ -1,8 +1,9 @@
 //jshint esversion:6
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const _ = require("lodash");
+
 const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -34,22 +35,25 @@ app.get("/", function(req, res) {
   })
   console.log("Render successful.");
 });
+
 //dynamic list itemSchem
 const listSchema = new mongoose.Schema({
   name: String,
   items:[itemSchema]
 });
 const List = mongoose.model("list",listSchema);
+
 //dynamic page routing
 app.get("/:customListName", function(req,res){
-  const listName = req.params.customListName;
+  const customListName = _.capitalize(req.params.customListName);
 
-  List.findOne({name:listName}, function(err, foundList){
+  List.findOne({name:customListName}, function(err, foundList){
     if(!err){
       if(!foundList){
+        console.log("No new list found");
         //create a new listTitle
         const newList = new List({
-          name:listName,
+          name:customListName,
           items:defaultItems
         });
         newList.save();
@@ -60,40 +64,52 @@ app.get("/:customListName", function(req,res){
       }
     }
   });
-
 });
+
 //post Home Route
 app.post("/", function(req, res) {
   const itemName = req.body.newItem;
+  const listName = req.body.list;
   const newItem = new Item({
     name: itemName
   });
-  newItem.save();
-  res.redirect("/");
+
+  if(listName ==="Today"){
+    newItem.save();
+    res.redirect();
+  } else{
+    List.findOne({name: listName}, function(err, foundList){
+      foundList.items.push(newItem);
+      foundList.save();
+      res.redirect("/"+ listName);
+    })
+  }
 });
+
 //post on Deelet route to delete the selected item using checkbox
 app.post("/delete",function(req,res){
   const removeId = req.body.checkbox;
-  Item.findByIdAndRemove(removeId, function(err){
-    if(err){
-      console.log(err);
-    } else {
-      console.log("Remove executed.");
-    }
-    res.redirect("/");
-  });
+  const listName = req.body.listName;
+  if(listName ==="Today"){
+    Item.findByIdAndRemove(removeId, function(err){
+      if(err){
+        console.log(err);
+      } else {
+        console.log("Remove executed.");
+      }
+      res.redirect("/");
+    });
+  } else {
+    List.findOneAndUpdate({name: listName},{$pull:{items: {_id:removeId}}}, function(err, foundList){
+      if (!err){
+        res.redirect("/"+listName);
+      }
+    })
+  }
+
+
 });
 
-// app.get("/work", function(req, res) {
-//   res.render("list", {
-//     listTitle: "Work List",
-//     newListItems: workItems
-//   });
-// });
-
-// app.get("/about", function(req, res) {
-//   res.render("about");
-// });
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
