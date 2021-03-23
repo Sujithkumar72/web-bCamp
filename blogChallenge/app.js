@@ -24,7 +24,6 @@ app.get("/", function(req, res){
     res.render("home", {homeContent: homeStartingContent,
     blogs: posts});
     //console.log(posts);
-    
 });
 app.get("/about", function(req,res){
     res.render("about",{aboutContent:aboutStartingContent});
@@ -45,4 +44,17 @@ app.post("/compose",function(req,res){
     };
     posts.push(postContent);
     res.redirect("/");
+});
+app.get("/posts/:postnum", function(req,res){
+    //var reqPage = req.params.postnum;
+    var requestedPage;
+    for(let i = 0; i<posts.length; i++){
+        if(posts[i].postTitle === req.params.postnum){
+            requestedPage="Match found";
+            break;
+        } else {
+            requestedPage="No Match found";
+        }
+    }
+    console.log(requestedPage);
 });
