@@ -5,9 +5,11 @@
 <form action="/compose" method="post">
     <fieldset>
         <legend>Type your New Blog</legend>
-        
-        <textarea row="60" cols="120" name="newContent" placeholder="Type your new blog content"></textarea><br/>
-        <button type="Submit" name="button" value="publish" >Publish</button>
+        <label>Title</label>
+        <input type="text" name="newTitle" class="form-control"/>
+        <label>Content</label>
+        <textarea class="form-control" name="newContent" placeholder="Type your new blog content"></textarea><br/>
+        <button class="btn btn-primary" type="Submit" name="button" value="publish" >Publish</button>
     </fieldset>
 </form>
 

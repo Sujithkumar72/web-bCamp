@@ -18,8 +18,13 @@ app.listen(3000, function(){
     console.log("Server started on Port 3000");
 });
 
+let posts =[];
+
 app.get("/", function(req, res){
-    res.render("home", {homeContent: homeStartingContent});
+    res.render("home", {homeContent: homeStartingContent,
+    blogs: posts});
+    //console.log(posts);
+    
 });
 app.get("/about", function(req,res){
     res.render("about",{aboutContent:aboutStartingContent});
@@ -31,5 +36,13 @@ app.get("/compose", function(req, res){
     res.render("compose");
 });
 app.post("/compose",function(req,res){
-    console.log(req.body.newContent);
+    //console.log(req.body.newContent +" "+ req.body.newTitle);
+    // let postTitle = req.body.newTitle;
+    // let postBody = req.body.newContent;
+    const postContent = {
+        postTitle : req.body.newTitle,
+        postBody : req.body.newContent
+    };
+    posts.push(postContent);
+    res.redirect("/");
 });
