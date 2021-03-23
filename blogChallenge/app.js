@@ -51,7 +51,7 @@ app.get("/posts/:postnum", function(req,res){
     for(let i = 0; i<posts.length; i++){
         let checkTitle = _.lowerCase(posts[i].postTitle);
         if(checkTitle === reqPage){
-            // requestedPage="Match found";
+            // requestedPage="Match found";git 
             checkTitle = checkTitle.toUpperCase();
             dynTitle = posts[i].postTitle;
             dynContent =posts[i].postBody;
