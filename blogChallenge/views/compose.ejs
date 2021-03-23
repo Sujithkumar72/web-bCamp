@@ -1,0 +1,15 @@
+<%- include("./partials/header") -%>
+<h1>Compose</h1>
+
+
+<form action="/compose" method="post">
+    <fieldset>
+        <legend>Type your New Blog</legend>
+        
+        <textarea row="60" cols="120" name="newContent" placeholder="Type your new blog content"></textarea><br/>
+        <button type="Submit" name="button" value="publish" >Publish</button>
+    </fieldset>
+</form>
+
+
+<%- include("./partials/footer") -%>
