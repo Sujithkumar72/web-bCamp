@@ -4,7 +4,7 @@
 
 <% for(let x=0; x< blogs.length; x++){ %>
 <h2><%= blogs[x].postTitle; %></h2>
-<p><%= blogs[x].postBody; %></p>
+<p><%= blogs[x].postBody.substring(0,100)+ "..."; %><a href="/posts/<%=blogs[x].postTitle %>">Read More</a></p>
 <% } %>
 
 <%- include("./partials/footer") -%>

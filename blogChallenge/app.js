@@ -46,15 +46,20 @@ app.post("/compose",function(req,res){
     res.redirect("/");
 });
 app.get("/posts/:postnum", function(req,res){
-    //var reqPage = req.params.postnum;
+    var reqPage = _.lowerCase(req.params.postnum);
     var requestedPage;
     for(let i = 0; i<posts.length; i++){
-        if(posts[i].postTitle === req.params.postnum){
-            requestedPage="Match found";
+        let checkTitle = _.lowerCase(posts[i].postTitle);
+        if(checkTitle === reqPage){
+            // requestedPage="Match found";
+            checkTitle = checkTitle.toUpperCase();
+            dynTitle = posts[i].postTitle;
+            dynContent =posts[i].postBody;
+            res.render("post", {blogTitle: dynTitle, blogContent:dynContent});
             break;
         } else {
             requestedPage="No Match found";
         }
     }
-    console.log(requestedPage);
+    // console.log(requestedPage);
 });
