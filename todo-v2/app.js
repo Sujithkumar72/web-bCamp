@@ -36,18 +36,25 @@ const item3 = new Item({
 });
 const defaultItems =[item1, item2, item3]; //array of document objects
 
-//Inserting array into collection using Model as Documents
-Item.insertMany(defaultItems, function(err){
-  if(err){
-    console.log(err);
-  } else{
-    console.log("Default items added to the DB");
-  }
-});
 
 
 app.get("/", function(req, res) {
-  res.render("list", {listTitle: "Today", newListItems: items});
+
+  Item.find({}, function(err, foundItems){ //finding querying all documents
+    if(foundItems.length === 0 ){
+      //Inserting documents if there is no default items
+      Item.insertMany(defaultItems, function(err){
+        if(err){
+          console.log(err);
+        } else{
+          console.log("Default items added to the DB");
+        }
+      });
+      res.redirect("/");
+    } else {
+      res.render("list", {listTitle: "Today", newListItems: foundItems});
+    }
+  });
 });
 
 app.post("/", function(req, res){
