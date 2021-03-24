@@ -58,14 +58,15 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res){
-  const item = req.body.newItem;
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
+  const itemName = req.body.newItem;
+//adding new item from the browser as document
+  const newItem = new Item({
+    name: itemName,
+  });
+
+  newItem.save(); //saving the document to the mongodb 
+
+  res.redirect("/");
 });
 
 app.get("/work", function(req,res){
