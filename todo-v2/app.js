@@ -89,7 +89,6 @@ app.post("/", function(req, res){
 
 //POST routing for selection of checkbox to delete item
 app.post("/delete", function(req,res){
-
   //using the name "checkbox" value of the selection is extracted
   const checkedItem = req.body.checkbox; 
   const listName = _.capitalize(req.body.listName);
@@ -99,9 +98,7 @@ app.post("/delete", function(req,res){
     Item.findByIdAndRemove(checkedItem, function(err){
       if(err){
         console.log(err);
-      } else {
-        console.log("selected item deleted from db");
-      }
+      } 
     });
     //after removal, routed back to the home route for display current list
     res.redirect("/");
@@ -119,7 +116,6 @@ app.post("/delete", function(req,res){
 app.get("/:customListName", function(req,res){
 //storing customlistName
   const customListName = _.capitalize(req.params.customListName);
-
   //checking for the customListName as document in the Collection
   List.findOne({name:customListName}, function(err, foundList){
     if(!err){
