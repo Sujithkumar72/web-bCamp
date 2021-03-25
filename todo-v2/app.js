@@ -69,6 +69,25 @@ app.post("/", function(req, res){
   res.redirect("/");
 });
 
+//routing for selection of checkbox to delete item
+app.post("/delete", function(req,res){
+
+  //using the name "checkbox" value of the selection is extracted
+  const checkedItem = req.body.checkbox; 
+
+  //mongoose remove from db - query to be executed for the selected item value in db
+  Item.findByIdAndRemove(checkedItem, function(err){
+    if(err){
+      console.log(err);
+    } else {
+      console.log("selected item deleted from db");
+    }
+  });
+
+  //after removal, routed back to the home route for display current list
+  res.redirect("/");
+});
+
 app.get("/work", function(req,res){
   res.render("list", {listTitle: "Work List", newListItems: workItems});
 });
