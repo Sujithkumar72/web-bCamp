@@ -24,6 +24,14 @@ const itemsSchema = {
 //mongoose model to create collection
 const Item = mongoose.model('Item',itemsSchema);
 
+//schema for custom Lists
+const listSchema = {
+  name: String,
+  items: [itemsSchema]
+}
+//model for Custom List
+const List = mongoose.model('list', listSchema);
+
 //mongodb document using Model in the Collection
 const item1 = new Item({
   name: "Welcome to your Todo"
@@ -69,7 +77,8 @@ app.post("/", function(req, res){
   res.redirect("/");
 });
 
-//routing for selection of checkbox to delete item
+
+//POST routing for selection of checkbox to delete item
 app.post("/delete", function(req,res){
 
   //using the name "checkbox" value of the selection is extracted
@@ -88,13 +97,32 @@ app.post("/delete", function(req,res){
   res.redirect("/");
 });
 
-app.get("/work", function(req,res){
-  res.render("list", {listTitle: "Work List", newListItems: workItems});
+
+//routing custom lists
+app.get("/:customListName", function(req,res){
+//storing customlistName
+  const customListName = req.params.customListName;
+
+  //checking for the customListName as document in the Collection
+  List.findOne({name:customListName}, function(err, foundList){
+    if(!err){
+      if(!foundList){ //if no document present
+        const list = new List({
+          name: customListName,
+          items: defaultItems
+        });
+
+        list.save();  //save the new list as new document
+
+        res.redirect("/"+customListName); //redirected to the customListName GET
+      } else {
+        //renders the list ejs to display the customList from the collection
+        res.render("list", {listTitle: foundList.name, newListItems: foundList.items});
+      } 
+    }
+  });
 });
 
-app.get("/about", function(req, res){
-  res.render("about");
-});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
