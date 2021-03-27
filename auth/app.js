@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require("express");
 const _ = require("lodash");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose =require("mongoose");
+const encrypt = require("mongoose-encryption")
 
 const app=express();
 app.set("view engine", "ejs");
@@ -26,10 +28,12 @@ app.get("/register", function(req,res){
     res.render("register");
 });
 
-const userSchema = {
+const userSchema = new mongoose.Schema({
     email: String,
     password: String
-};
+});
+
+userSchema.plugin(encrypt,{ secret:process.env.API_KEY, encryptedFields:["password"]});
 const User =mongoose.model("user", userSchema);
 
 app.post("/register", function(req,res){
